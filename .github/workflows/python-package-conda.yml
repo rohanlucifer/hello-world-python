@@ -29,9 +29,9 @@ jobs:
     # Step 5: Run Docker Container (Testing)
     - name: Run Docker Container
       run: |
-        docker run --name pythoncicd:latest -d -p 8088:8080 pythoncicd:latest
+        docker run --name pythoncicd -d -p 8088:8080 pythoncicd
         sleep 10
         docker ps
-        docker logs pythoncicd:latest
-        docker stop pythoncicd:latest
-        docker rm pythoncicd:latest
+        docker logs pythoncicd
+        docker stop pythoncicd
+        docker rm pythoncicd
