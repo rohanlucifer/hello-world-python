@@ -34,4 +34,3 @@ jobs:
         docker ps
         docker logs pythoncicd
         docker stop pythoncicd
-        docker rm pythoncicd
