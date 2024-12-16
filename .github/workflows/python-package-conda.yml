@@ -1,0 +1,35 @@
+name: Java CI with Maven
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-java:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    # Step 1: Checkout code
+    - name: Checkout code
+      uses: actions/checkout
+
+       # Step 3: Build Docker Image
+    - name: Build Docker Image
+      run: docker build -t pythoncicd:latest .
+
+    # Step 4: Push Docker Image to Docker Hub
+   # - name: Push Docker Image
+    #  run: docker push ${{ secrets.DOCKER_USERNAME }}/maven-app:latest
+
+    # Step 5: Run Docker Container (Testing)
+    - name: Run Docker Container
+      run: |
+        docker run --name pythoncicd:latest -d -p 8088:8080 pythoncicd:latest
+        sleep 10
+        docker ps
+        docker logs pythoncicd:latest
+        docker stop pythoncicd:latest
+        docker rm pythoncicd:latest
